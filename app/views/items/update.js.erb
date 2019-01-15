@@ -1,0 +1,5 @@
+<% if @item.complete? == true %>
+$('#edit_item_<%= @item.id %>').appendTo('#complete_items');
+<% else %>
+$('#edit_item_<%= @item.id %>').appendTo('#pending_items');
+<% end %>

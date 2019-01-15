@@ -1,5 +1,3 @@
-//$('#bucketlists').html("<%#= j (render 'bucketlist') %>");
-//$('#bucket-form').slideUp(350);
-
-//$("#flash").replaceWith("<%= j render 'layouts/flash_messages' %>");
-//pooling();
+$('#new_bucketlist').remove();
+$('#new_link').show();
+$('#bucketlists').append('<%= j render(@bucketlist) %>');

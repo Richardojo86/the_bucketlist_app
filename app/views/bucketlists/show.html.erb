@@ -1,0 +1,10 @@
+<%= form_for @bucketlist do |f| %>
+<%= f.text_field :name %>
+<%= f.submit "Update" %></br></br>
+<%= f.label :name, @bucketlist.name %>
+<%= link_to "(remove)", @bucketlist, method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+<% end %>
+
+<div> <h4> <%= link_to "View Items", bucketlist_items_path(@bucketlist.id) %> for <%=@bucketlist.name %> </h4>
+<p><%= link_to "Back to Bucketlist", bucketlists_path %></p>
+</div>

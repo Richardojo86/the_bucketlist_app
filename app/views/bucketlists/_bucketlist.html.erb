@@ -1,1 +1,5 @@
-<div> <%= @bucketlist.name %></div>  ggggggg
+<%= form_for bucketlist do |f| %>
+  <%= f.label :name, bucketlist.name %>
+  <%= link_to "(view)", bucketlist_path(bucketlist.id) %>
+  <%= link_to "(remove)", bucketlist, method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+<% end %>

@@ -1,0 +1,7 @@
+<div id="item-form">
+  <% binding.pry %>
+  <%= form_for @item, remote: true do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit %>
+  <% end %>
+</div>

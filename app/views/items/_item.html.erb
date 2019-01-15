@@ -1,0 +1,5 @@
+<%= form_for bucketlist_item_url do |f| %>
+  <%= f.check_box :complete %>
+  <%= f.submit "Update" %>
+  <%= f.label :complete, @item.name %>
+<% end %>

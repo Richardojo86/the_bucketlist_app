@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :bucketlists do
     resources :items
   end
+  root to: 'bucketlists#index'
 end

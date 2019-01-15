@@ -1,62 +1,55 @@
 class BucketlistsController < ApplicationController
+  before_action :find_bucketlist, only: [:show, :update]
 
   def index
-    @bucketlists = Bucketlist.all
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render json: @bucketlists, each_serializer: BucketlistSerializer }
-    end
+    @bucketlists = Bucketlist.all.last(5)
   end
 
   def new
-    @bucketlist = Bucketlist.new(params[:name])
-    respond_to do |format|
-      format.html { render :template => "bucketlists/_form"}
-      format.js { }
-    end
+    @bucketlist = Bucketlist.new
   end
 
   def create
-    @bucketlist  = Bucketlist.create(bucket_params)
-    flash[:notice] = "successfully created"
-    redirect_to bucketlists_path
-    # respond_to do |format|
-    #   format.html { redirect_to bucketlists_path }
-    #   format.js { }
-    # end
+    @bucketlist = Bucketlist.create!(bucket_params)
+
+    respond_to do |format|
+      format.html { redirect_to bucketlists_path }
+      format.js
+    end
   end
 
-  # def show
-  #   @bucketlist = Bucketlist.find(params[:id])
-  # end
+  def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
-  # def create
-  #   @bucketlist = Bucketlist.new(name)
-  #   if @bucketlist.valid?
-  #     @bucketlist.save
-  #     redirect_to bucketlist_path
-  #   else
-  #     render :new
-  #   end
-  # end
+  def update
+    @bucketlist.update_attributes!(bucket_params)
 
-  # def create
-  #   @bucketlist = Bucketlist.create(params[:name])
-  #   respond_to do |format|
-  #     format.html { redirect_to bucketlist_path }
-  #     format.js
-  #   end
-  # end
-  #
+    respond_to do |format|
+      format.html { redirect_to bucketlist_path(@bucketlist) }
+      format.js
+    end
+  end
 
+  def destroy
+    @bucketlist = Bucketlist.destroy(params[:id])
 
-  # def all_bucketlists
-  #   @bucketlist = Bucketlist.all
-  # end
+    respond_to do |format|
+      format.html { redirect_to bucketlists_path }
+      format.js
+    end
+  end
 
   private
 
   def bucket_params
     params.require(:bucketlist).permit(:name)
+  end
+
+  def find_bucketlist
+    @bucketlist = Bucketlist.find(params[:id])
   end
 end

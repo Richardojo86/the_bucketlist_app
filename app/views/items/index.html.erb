@@ -1,0 +1,10 @@
+<h1> Items </h1>
+<%= link_to "New Item", new_bucketlist_item_path, id: "new_link", remote: true %>
+<h2>Pending Items</h2>
+<div class="items" id="pending-items">
+  <%= render @pending_items %>
+</div>
+<h2>Comlpete Tasks</h2>
+<div class="items" id="complete_items">
+  <%= render @complete_items %>
+</div>

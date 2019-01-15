@@ -1,25 +1,6 @@
-<div class="row">
-  <div class="col-md-5 col-md-offset-1">
-    <h2>Bucketlist</h2>
-  </div>
-
-  <div class="col-md-2 col-md-offset-4">
-    <%= link_to new_bucketlist_path do %>
-      <button class="btn btn-default">New</button>
-    <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-2" id="bucket-form" style="display:none;"></div>
-</div>
-
-<div class="row">
-  <div class="col-md-7 col-md-offset-1" id="bucketlists">
-    <div class="bucketlists-table">
-      <% @bucketlists.each do |bucketlist| %>
-        <div> <%= bucketlist.name %></div>
-      <% end %>
-    </div>
-  </div>
+<h1>The Bucketlist App</h1>
+<%= link_to "New Bucketlist", new_bucketlist_path, id: "new_link", remote: true %>
+<h2>Newly</h2>
+<div class="bucketlists" id="bucketlists">
+  <%= render @bucketlists %>
 </div>
