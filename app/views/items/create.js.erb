@@ -1,4 +1,4 @@
 $('#new_item').remove();
 $('#new_link').show();
-$('#items').append('<%= j render(@item) %>');
-$('#edit_item_<%= @item.id %>').submitOnCheck();
+$('#items').append('<%= j render(@bucketlist_item) %>');
+$('#edit_item_<%= @bucketlist_item.id %>').submitOnCheck();

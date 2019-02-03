@@ -7,16 +7,20 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = @bucketlist_items.new
+    @bucketlist_item = @bucketlist_items.new
   end
 
   def create
-    @item = @bucketlist_items.create!(params[:name])
+    @bucketlist_item = @bucketlist_items.create!(name: params[:name])
 
     respond_to do |format|
       format.html { redirect_to bucketlist_items_path(bucketlist) }
       format.js
     end
+  end
+
+  def show
+    @bucketlist_item = @bucketlist_items.find_by(id: params[:id])
   end
 
   def update
