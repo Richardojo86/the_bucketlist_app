@@ -1,5 +1,10 @@
-<%= form_with url: bucketlist_item_path(item.bucketlist.id, item.id) do |f| %>
-  <%= f.check_box :complete %>
-  <%= f.submit "Update" %>
-  <%= f.label :complete, item.name %>
-<% end %>
+<div class="container">
+  <%= form_for [item.bucketlist, item] do |f| %>
+    <%= f.check_box :complete %>
+    <%= f.label item.name %>
+
+    <%= f.submit "Mark as complete" %>
+    <%= link_to "delete", [item.bucketlist, item], method: :delete, data: {confirm: "Are you sure?"}, class: "delete-link", remote: true %>
+
+  <% end %>
+</div>

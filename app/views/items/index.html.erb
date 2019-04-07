@@ -1,10 +1,25 @@
-<h1> Items </h1>
-<%= link_to "New Item", new_bucketlist_item_path, id: "new_link", remote: true %>
-<h2>Pending Items</h2>
-<div class="items" id="pending-items">
-  <%= render @pending_items %>
-</div>
-<h2>Comlpete Tasks</h2>
-<div class="items" id="complete_items">
-  <%= render @complete_items %>
+<div class="container-fluid">
+  <div class="new-item">
+    <h3> Items for: <%= @bucketlist.name %></h3>
+    <div class="row">
+      <div class="col-md-12 margin-left-15">
+        <%= link_to "Create an Item", new_bucketlist_item_path, id: "new_link", remote: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Pending Items</h4>
+      <div class="items" id="pending-items">
+        <%= render @pending_items %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Complete Tasks</h4>
+      <div class="items" id="complete_items">
+        <%= render @complete_items %>
+      </div>
+    </div>
+  </div>
+  <div class="bucketlist-item"><%= link_to ">> Back to Bucketlist", bucketlist_path(@bucketlist) %></div>
 </div>

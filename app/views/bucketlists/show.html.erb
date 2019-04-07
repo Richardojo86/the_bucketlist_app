@@ -1,10 +1,29 @@
-<%= form_for @bucketlist do |f| %>
-<%= f.text_field :name %>
-<%= f.submit "Update" %></br></br>
-<%= f.label :name, @bucketlist.name %>
-<%= link_to "(remove)", @bucketlist, method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
-<% end %>
+<div class="new-bucketlist">
+  <div class="new-bucketlist">
+    <h3> Single Bucketlist</h3>
+    <h6 class="new-bucketlist"> Bucketlist Name: <%= @bucketlist.name %> </h6>
+  </div>
 
-<div> <h4> <%= link_to "View Items", bucketlist_items_path(@bucketlist.id) %> for <%=@bucketlist.name %> </h4>
-<p><%= link_to "Back to Bucketlist", bucketlists_path %></p>
+  <div class="new-bucketlist">
+    <%= form_for @bucketlist do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit "Update", class:"btn-primary" %>
+      <%= link_to "Remove", @bucketlist, method: :delete, class:"btn-delete", data: {confirm: "Are you sure?"}, remote: true %>
+
+    <% end %>
+  </div>
+</div>
+
+<div class="bucketlist bucketlist-item">
+  <% if @bucketlist.items.present? %>
+    <h4> Items for: <%= @bucketlist.name %> </h4>
+    <div>
+        <%= link_to bucketlist_items_path(@bucketlist.id) do %>
+          <%= @bucketlist.items.count %> items
+        <% end %>
+      </div>
+  <% else %>
+    <%= link_to "Create an item?", bucketlist_items_path(@bucketlist.id) %>
+  <% end %>
+<div class="bucketlist-item"><%= link_to ">> Back to Bucketlists", bucketlists_path %></div>
 </div>

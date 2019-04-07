@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :find_bucketlist_items
+  before_action :find_bucketlist_item, only: [:edit, :update, :show, :destroy]
 
   def index
     @pending_items = @bucketlist_items.where(complete: false)
@@ -11,23 +12,34 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @bucketlist_item = @bucketlist_items.create!(name: params[:name])
+    @bucketlist_item_cre = @bucketlist_items.create!(item_params)
 
     respond_to do |format|
-      format.html { redirect_to bucketlist_items_path(bucketlist) }
+      format.html { redirect_to bucketlist_items_path(@bucketlist) }
       format.js
     end
   end
 
-  def show
-    @bucketlist_item = @bucketlist_items.find_by(id: params[:id])
-  end
+  def show; end
 
   def update
-    @bucketlist_items.update_attributes!(params[:complete])
+    if item_params[:complete] == "1"
+      @item.update(complete: true)
+    else
+      @item.update(complete: false)
+    end
 
     respond_to do |format|
-      format.html { redirect_to bucketlist_items_path(bucketlist) }
+      format.html { redirect_to bucketlist_items_path(@bucketlist) }
+      format.js
+    end
+  end
+
+  def destroy
+    @item.destroy
+
+    respond_to do |format|
+      format.html { redirect_to bucketlist_items_path(@bucketlist) }
       format.js
     end
   end
@@ -39,7 +51,11 @@ class ItemsController < ApplicationController
     @bucketlist_items = @bucketlist.items
   end
 
-  def bucketlist
-    @bucketlist_items.bucketlist
+  def find_bucketlist_item
+    @item = Item.find_by(id: params[:id])
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :id, :complete)
   end
 end

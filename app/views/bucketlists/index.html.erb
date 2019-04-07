@@ -1,6 +1,18 @@
-<h1>The Bucketlist App</h1>
-<%= link_to "New Bucketlist", new_bucketlist_path, id: "new_link", remote: true %>
-<h2>Newly</h2>
-<div class="bucketlists" id="bucketlists">
-  <%= render @bucketlists %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="new-bucketlist">
+        <h3>The bucketlist app</h3>
+      </div>
+      <div class="margin-left-15">
+        <%= link_to "New bucketlist", new_bucketlist_path, id: "new_link", remote: true %>
+      </div>
+    </div>
+    <div class="col-md-12 new-bucketlist">
+      <h4>Total Bucketlists: <%= @bucketlists.count%> </h4>
+      <div class="bucketlists margin-left-15" id="bucketlists">
+        <%= render @bucketlists %>
+      </div>
+    </div>
+  </div>
 </div>

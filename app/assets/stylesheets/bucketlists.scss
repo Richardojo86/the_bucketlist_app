@@ -1,3 +1,31 @@
 // Place all the styles related to the bucketlists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.new-bucketlist, .bucketlist-item{
+  margin-top: 30px;
+}
+.btn-delete {
+  color: #fff;
+  background-color: red;
+  border: 1px solid red;
+  padding: 2px 7px 5px;
+}
+
+.btn-primary:hover {
+  color: #0069d9 !important;
+  background-color: #ffffff !important;
+}
+
+.btn-delete:hover {
+  color: red !important;
+  background-color: #ffffff !important;
+}
+
+a:hover{
+  text-decoration: none !important;
+}
+
+.view-button{
+  border: 1px solid red;
+  padding: 2px 7px 5px;
+}

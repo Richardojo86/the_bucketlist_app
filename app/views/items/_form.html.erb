@@ -1,7 +1,6 @@
 <div id="item-form">
-  <%# binding.pry %>
-  <%= form_with url: bucketlist_item_create_path, remote: true do |f| %>
+  <%= form_for [@bucketlist_item.bucketlist, @bucketlist_item], remote: true do |f| %>
     <%= f.text_field :name %>
-    <%= f.submit %>
+    <%= f.submit class: "btn-primary"%>
   <% end %>
 </div>

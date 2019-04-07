@@ -18,12 +18,7 @@ class BucketlistsController < ApplicationController
     end
   end
 
-  def show
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+  def show; end
 
   def update
     @bucketlist.update_attributes!(bucket_params)

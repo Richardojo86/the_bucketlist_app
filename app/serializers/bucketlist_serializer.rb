@@ -1,7 +1,4 @@
 class BucketlistSerializer < ActiveModel::Serializer
-  attributes :id, :name, :date
-
-  def date
-    object.created_at.strftime("%m, %y")
-  end
+  has_many :items
+  attributes :id, :name
 end
