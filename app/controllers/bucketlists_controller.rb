@@ -11,7 +11,6 @@ class BucketlistsController < ApplicationController
 
   def create
     @bucketlist = Bucketlist.create!(bucket_params)
-
     respond_to do |format|
       format.html { redirect_to bucketlists_path }
       format.js
@@ -21,8 +20,12 @@ class BucketlistsController < ApplicationController
   def show; end
 
   def update
-    @bucketlist.update_attributes!(bucket_params)
-
+    bucketlist = @bucketlist.update_attributes(bucket_params)
+    if bucketlist
+      flash[:success] = "Bucketlist updated successfully"
+    else
+      flash[:error] = "could not update bucketlist"
+    end
     respond_to do |format|
       format.html { redirect_to bucketlist_path(@bucketlist) }
       format.js

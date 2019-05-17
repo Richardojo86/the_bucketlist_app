@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :find_bucketlist_items
-  before_action :find_bucketlist_item, only: [:edit, :update, :show, :destroy]
+  before_action :find_bucketlist_item, only: [:update, :show, :destroy]
 
   def index
     @pending_items = @bucketlist_items.where(complete: false)
@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
   def show; end
 
   def update
+
     if item_params[:complete] == "1"
       @item.update(complete: true)
     else
