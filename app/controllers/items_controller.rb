@@ -23,7 +23,6 @@ class ItemsController < ApplicationController
   def show; end
 
   def update
-
     if item_params[:complete] == "1"
       @item.update(complete: true)
     else

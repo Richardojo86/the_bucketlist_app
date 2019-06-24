@@ -3,7 +3,12 @@ class BucketlistsController < ApplicationController
 
   def index
     @bucketlists = Bucketlist.all.last(5)
+    respond_to do |format|
+      format.html
+      format.json {render json: @bucketlists}
+
   end
+end
 
   def new
     @bucketlist = Bucketlist.new
@@ -17,7 +22,12 @@ class BucketlistsController < ApplicationController
     end
   end
 
-  def show; end
+  def show;
+    respond_to do |f|
+      f.html
+      f.json {render json: @post}
+    end
+   end
 
   def update
     bucketlist = @bucketlist.update_attributes(bucket_params)

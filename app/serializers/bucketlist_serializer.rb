@@ -1,4 +1,5 @@
 class BucketlistSerializer < ActiveModel::Serializer
-  has_many :items
   attributes :id, :name
+
+  has_many :items
 end

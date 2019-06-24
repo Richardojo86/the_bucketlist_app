@@ -1,5 +1,5 @@
 <div id="bucket-form">
-<%= form_for @bucketlist, remote: true do |f| %>
+<%= form_for @bucketlist, :html =>{:id =>"new_list"} do |f| %>
   <%= f.text_field :name %>
   <%= f.submit class: "btn-primary" %>
 <% end %>
