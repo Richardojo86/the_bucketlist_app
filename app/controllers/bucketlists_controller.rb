@@ -6,7 +6,6 @@ class BucketlistsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render json: @bucketlists}
-
   end
 end
 
@@ -18,14 +17,14 @@ end
     @bucketlist = Bucketlist.create!(bucket_params)
     respond_to do |format|
       format.html { redirect_to bucketlists_path }
-      format.js
+      format.json { render json: @bucketlist }
     end
   end
 
   def show;
     respond_to do |f|
       f.html
-      f.json {render json: @post}
+      f.json {render json: @bucketlist}
     end
    end
 

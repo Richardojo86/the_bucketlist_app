@@ -1,6 +1,6 @@
 <div id="bucket-form">
-<%= form_for @bucketlist, :html =>{:id =>"new_list"} do |f| %>
-  <%= f.text_field :name %>
-  <%= f.submit class: "btn-primary" %>
-<% end %>
+<form id="new-bucket-form">
+  <input type="text" name="name" id="bucket_name">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </div>
