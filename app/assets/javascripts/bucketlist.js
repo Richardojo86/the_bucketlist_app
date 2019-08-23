@@ -1,27 +1,23 @@
 $(document).ready(function(e) { 
     getBucketlists();
-
-    const addLink = document.getElementById('new_link');
-    addLink.addEventListener('click', function(event) {
-      setTimeout(() => {
-        const addListForm = document.getElementById('new-bucket-form');
-        addListForm.addEventListener('submit', function(event) {
-          event.preventDefault();
-          const bucketName = $('#bucket_name').val();
-          fetch('/bucketlists', {
-            method: 'POST',
-            body: JSON.stringify({name: bucketName}),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then(res => res.json())
-          .then(bucket => {
-          }).catch(() => window.location.reload());
-        });
-      }, 500);
-    });
-
+    sortBtnFunction();
 })
+
+const addNewLink = (event) => {
+    //event.preventDefault();
+    const bucketName = $('#bucket_name').val();
+    fetch('/bucketlists', {
+      method: 'POST',
+      body: JSON.stringify({name: bucketName }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json())
+    .then(bucket => {
+      console.log(bucket)
+    })
+    .catch((error) => error);
+}
 
 const getBucketlists = () => {
   fetch(`/bucketlists.json`)
@@ -69,13 +65,23 @@ const getBucketlists = () => {
                 console.log(id,list.name)
             })
 
+            const delete_btn = document.getElementById('deletebtn')
+            delete_btn.addEventListener('click', function(event) {
+              event.preventDefault();
+              console.log(id,list.name, "item to be removed")
+              // fetch(`/bucketlists/${id}.json`, {
+              //   method: 'DELETE'
+              // headers: {'Content-Type': 'application/json'},
+              // }).then(() => {console.log('removed'); })
+            })
+
         })
 
       })
     })
   })
  }
- // this is part of the logic for my delete button its kinda incomplete but this is the general idea 
+ // this is part of the logic for my delete button its kinda incomplete but this is the general idea
  // const delete_btn = document.getElementById('deletebtn')
  // delete_btn.addEventListener('click', function(event) {
  //   event.preventDefault();
@@ -83,6 +89,41 @@ const getBucketlists = () => {
  //     method: 'Delete'
  //   }).then(() => {console.log('removed'); })
  // })
+
+ function sortBtnFunction(){
+   const sort_btn = document.getElementById("srt")
+   sort_btn.addEventListener('click', function(event) {
+     fetch(`/bucketlists.json`)
+       .then(res => res.json())
+       .then(bucketlists => {
+          $("#bucketlists").html('');
+          bucketlists.sort(function(a, b) {
+            var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+
+            // names must be equal
+            return 0;
+          });
+
+         bucketlists.forEach(bucketlist => {
+           let newBucketlist = new Bucketlist(bucketlist)
+           let bucketlistHtml = newBucketlist.formatIndex()
+           $("#bucketlists").append(bucketlistHtml)
+           let myButton = document.createElement('a')
+           myButton.innerText = "View"
+           myButton.dataset.id = bucketlist.id
+           myButton.href = "http://localhost:3000/bucketlists/" + [bucketlist.id]
+           let div = document.getElementById("bucketlists")
+           div.append(myButton)
+ })
+});
+})}
 
 function Bucketlist(bucketlist){
   this.id = bucketlist.id

@@ -36,8 +36,8 @@ end
       flash[:error] = "could not update bucketlist"
     end
     respond_to do |format|
-      format.html { redirect_to bucketlist_path(@bucketlist) }
-      format.js
+      format.html
+      format.json {render json: @bucketlist }
     end
   end
 
@@ -45,8 +45,8 @@ end
     @bucketlist = Bucketlist.destroy(params[:id])
 
     respond_to do |format|
-      format.html { redirect_to bucketlists_path }
-      format.js
+      format.html 
+      format.json {render json: @bucketlists }
     end
   end
 
